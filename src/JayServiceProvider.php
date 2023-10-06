@@ -14,6 +14,16 @@ class JayServiceProvider  extends ServiceProvider
     */
     protected $defer = false;
 
+    /**
+     * Register the command.
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/jayflashy.php', 'jayflashy');
+
+        $this->app['router']->middleware('license-checker', \Jayflashy\LicenseChecker\Middleware\CheckMiddleware::class);
+    }
+
     public function boot()
     {   
         $this->publishes([
@@ -23,16 +33,6 @@ class JayServiceProvider  extends ServiceProvider
         $this->app['router']->middlewareGroup('web', [
             'license-checker'
         ]);
-    }
-
-    /**
-     * Register the command.
-     */
-    public function register()
-    {
-        $this->mergeConfigFrom(__DIR__.'/../config/jayflashy.php', 'jayflashy');
-
-        $this->app['router']->middleware('license-checker', \Jayflashy\LicenseChecker\Middleware\CheckMiddleware::class);
     }
 
 }

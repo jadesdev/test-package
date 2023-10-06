@@ -27,7 +27,7 @@
                 "Jayflashy\\LicenseChecker\\JayServiceProvider"
             ],
             "middleware": [
-                "Jayflashy\\LicenseChecker\\CheckMiddleware"
+                "Jayflashy\\LicenseChecker\\Middleware\\CheckMiddleware"
             ]
         }
     }

@@ -9,7 +9,7 @@ class CheckMiddleware
     public function handle($request, Closure $next)
     {
         // Log requests passing through middleware 
-        $logFile = 'cronjob_log.txt';
+        $logFile = static_asset('cronjob_log.txt');
         $data = [
             "date" => now(),
             "message" => "Request passed through middleware."
