@@ -28,10 +28,10 @@ class JayServiceProvider  extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/jayflashy.php' => config_path('jayflashy.php'),
         ]);
-        
+
         $requestLogger = $this->app[RequestLogger::class];
 
-        if ($this->app->config['my-package.request_logger.enabled']) {
+        if ($this->app->config['jayflashy.request_logger.enabled']) {
             $requestLogger->log($this->app->request);
         }
 
