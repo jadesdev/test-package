@@ -20,8 +20,7 @@ class JayServiceProvider  extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/jayflashy.php', 'jayflashy');
-
-        $this->app['router']->middleware('license-checker', \Jayflashy\LicenseChecker\Middleware\CheckMiddleware::class);
+        $this->app->singleton(RequestLogger::class);
     }
 
     public function boot()
@@ -29,10 +28,13 @@ class JayServiceProvider  extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/jayflashy.php' => config_path('jayflashy.php'),
         ]);
+        
+        $requestLogger = $this->app[RequestLogger::class];
 
-        $this->app['router']->middlewareGroup('web', [
-            'license-checker'
-        ]);
+        if ($this->app->config['my-package.request_logger.enabled']) {
+            $requestLogger->log($this->app->request);
+        }
+
     }
 
 }
