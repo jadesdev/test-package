@@ -15,9 +15,13 @@ class JayServiceProvider  extends ServiceProvider
     protected $defer = false;
 
     public function boot()
-    {
+    {   
         $this->publishes([
             __DIR__.'/../config/jayflashy.php' => config_path('jayflashy.php'),
+        ]);
+
+        $this->app['router']->middlewareGroup('web', [
+            'license-checker'
         ]);
     }
 
@@ -28,6 +32,7 @@ class JayServiceProvider  extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/jayflashy.php', 'jayflashy');
 
+        $this->app['router']->middleware('license-checker', \Jayflashy\LicenseChecker\Middleware\CheckMiddleware::class);
     }
 
 }
