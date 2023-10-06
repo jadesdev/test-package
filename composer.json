@@ -25,9 +25,6 @@
         "laravel": {
             "providers": [
                 "Jayflashy\\LicenseChecker\\JayServiceProvider"
-            ],
-            "middleware": [
-                "Jayflashy\\LicenseChecker\\Middleware\\CheckMiddleware"
             ]
         }
     }
