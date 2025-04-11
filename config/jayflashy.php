@@ -15,6 +15,6 @@ return [
     'appUrl' => getenv('APP_URL'),
 
     'request_logger' => [
-        'enabled' => true,
+        'enabled' => false,
     ],
 ];

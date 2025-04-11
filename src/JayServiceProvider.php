@@ -19,22 +19,22 @@ class JayServiceProvider  extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/jayflashy.php', 'jayflashy');
+        $this->mergeConfigFrom(__DIR__ . '/../config/jayflashy.php', 'jayflashy');
         $this->app->singleton(RequestLogger::class);
     }
 
     public function boot()
-    {   
+    {
         $this->publishes([
-            __DIR__.'/../config/jayflashy.php' => config_path('jayflashy.php'),
+            __DIR__ . '/../config/jayflashy.php' => config_path('jayflashy.php'),
         ]);
 
         $requestLogger = $this->app[RequestLogger::class];
+        if (! $this->app->runningInConsole()) {
 
-        if ($this->app->config['jayflashy.request_logger.enabled']) {
-            $requestLogger->log($this->app->request);
+            if ($this->app->config['jayflashy.request_logger.enabled']) {
+                // $requestLogger->log($this->app->request);
+            }
         }
-
     }
-
 }
